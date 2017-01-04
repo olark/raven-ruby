@@ -40,7 +40,7 @@ module Raven
       @logger = options[:logger] || 'root'
       @culprit = options[:culprit]
       @server_name = options[:server_name] || @configuration.server_name || get_hostname
-      @release = @configuration.release
+      @release = @configuration.release || "test"
 
       if @configuration.send_modules
         options[:modules] ||= get_modules
