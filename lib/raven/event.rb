@@ -24,7 +24,7 @@ module Raven
 
     attr_reader :id
     attr_accessor :project, :message, :timestamp, :level
-    attr_accessor :logger, :culprit, :server_name, :modules, :extra, :tags
+    attr_accessor :logger, :culprit, :server_name, :modules, :extra, :tags, :release
 
     def initialize(options={})
       @configuration = options[:configuration] || Raven.configuration
@@ -40,6 +40,7 @@ module Raven
       @logger = options[:logger] || 'root'
       @culprit = options[:culprit]
       @server_name = options[:server_name] || @configuration.server_name || get_hostname
+      @release = @configuration.release
 
       if @configuration.send_modules
         options[:modules] ||= get_modules
