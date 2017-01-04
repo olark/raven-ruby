@@ -60,7 +60,6 @@ module Raven
     attr_accessor :server_name
 
     # Release tag to be passed with every event sent to Sentry.
-    # We automatically try to set this to a git SHA or Capistrano release.
     attr_accessor :release
 
     IGNORE_DEFAULT = ['ActiveRecord::RecordNotFound',
@@ -87,10 +86,6 @@ module Raven
     end
 
     def detect_release
-      detect_release_from_git
-    end
-
-    def detect_release_from_git
       `git rev-parse --short HEAD`.strip if File.directory?(".git") rescue nil
     end
 
