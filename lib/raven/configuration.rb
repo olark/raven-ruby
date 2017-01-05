@@ -82,7 +82,7 @@ module Raven
       self.encoding = 'json'
       self.timeout = 1
       self.open_timeout = 1
-      self.release = detect_release || "test"
+      self.release = detect_release
     end
 
     def detect_release

@@ -104,6 +104,7 @@ module Raven
       data['extra'] = @extra if @extra
       data['tags'] = @tags if @tags
       data['sentry.interfaces.User'] = @user if @user
+      data['release'] = @release if @release
       @interfaces.each_pair do |name, int_data|
         data[name] = int_data.to_hash
       end
