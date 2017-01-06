@@ -19,8 +19,9 @@ module Raven
         elsif defined?(RAILS_DEFAULT_LOGGER)
           RAILS_DEFAULT_LOGGER
         end
+        config.release ||= config.detect_release # if project_root has changed, need to re-check
       end
-      
+
     end
   end
 end

@@ -24,7 +24,7 @@ module Raven
 
     attr_reader :id
     attr_accessor :project, :message, :timestamp, :level
-    attr_accessor :logger, :culprit, :server_name, :modules, :extra, :tags
+    attr_accessor :logger, :culprit, :server_name, :modules, :extra, :tags, :release
 
     def initialize(options={})
       @configuration = options[:configuration] || Raven.configuration
@@ -40,6 +40,7 @@ module Raven
       @logger = options[:logger] || 'root'
       @culprit = options[:culprit]
       @server_name = options[:server_name] || @configuration.server_name || get_hostname
+      @release = @configuration.release || "test"
 
       if @configuration.send_modules
         options[:modules] ||= get_modules
@@ -103,6 +104,7 @@ module Raven
       data['extra'] = @extra if @extra
       data['tags'] = @tags if @tags
       data['sentry.interfaces.User'] = @user if @user
+      data['release'] = @release if @release
       @interfaces.each_pair do |name, int_data|
         data[name] = int_data.to_hash
       end

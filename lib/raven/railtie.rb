@@ -11,6 +11,7 @@ module Raven
       Raven.configure(true) do |config|
         config.logger ||= ::Rails.logger
         config.project_root ||= ::Rails.root
+        config.release ||= config.detect_release # if project_root has changed, need to re-check
       end
 
       if defined?(::ActionDispatch::DebugExceptions)
